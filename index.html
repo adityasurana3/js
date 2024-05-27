@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Principle: <input oninput="debounce()" type="text" id="principle"> <br> <br>
+    Rate: <input oninput="debounce()" type="text" id="rate"> <br> <br>
+    Time: <input oninput="debounce()" type="text" id="time"> <br> <br>
+    <input type="button" value="Calculate" onclick="calculate()"> <br><br>
+    <div class="ans"></div>
+
+</body>
+
+<script>
+    let timeout;
+    function debounce(){
+        clearTimeout(timeout);
+        setTimeout(function(){
+            calculate()
+        },1000)
+    }
+    function calculate(){
+        const principle = document.getElementById('principle').value;
+        const rate = document.getElementById("rate").value;
+        const time = document.getElementById("time").value;
+        fetch("http://localhost:3001/?principle="+principle+"&rate="+rate+"&time="+time)
+            .then(function(response){
+                response.text()
+                .then(function(ans){
+                    document.querySelector('.ans').innerHTML = ans;
+                })
+            })
+    }
+</script>
+
+</html>
