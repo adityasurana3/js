@@ -7,7 +7,7 @@ export const notifications = atom({
     default: selector({
         key: "networkAtomSelector",
         get: async () =>{
-            const res = await axios.get("https://sum-server.100xdevs.com/notifications/")
+            const res = await axios.get("http://localhost/notifications/")
             return res.data
         }
     })
@@ -17,7 +17,7 @@ export const notifications = atom({
 export const totalNotification = selector({
     key: "totalNotification",
     get: ({get}) =>{
-        const allNotification =  get(notifications)
+        const allNotification =  get(notifications) 
         return allNotification.network + allNotification.jobs + allNotification.messaging + allNotification.notifications
     }
 })
